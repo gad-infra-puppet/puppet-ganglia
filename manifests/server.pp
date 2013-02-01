@@ -20,7 +20,7 @@
 #
 class ganglia::server (
   $clusters = [{cluster_name => 'my_cluster', cluster_hosts => [{address => 'localhost', port => '8649'}]}],
-  $gridname = '',
+  $gridname = false,
   ) {
 
   include ganglia::client
@@ -33,6 +33,10 @@ class ganglia::server (
   }
 
   service {$ganglia_server_pkg:
+    ensure      => running,
+    hasstatus   => true,
+    hasrestart  => true,
+    enable      => true,
     require => Package[$ganglia_server_pkg];
   }
 

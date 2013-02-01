@@ -23,15 +23,16 @@ ${::operatingsystem}")
     ensure => present,
     alias  => 'ganglia_webserver',
   }
-  file {'/etc/apache2/sites-enabled/ganglia':
-    ensure  => link,
-    target  => '/etc/apache2/sites-available/ganglia',
-    require => File['/etc/apache2/sites-available/ganglia'],
-  }
 
-  file {'/etc/apache2/sites-available/ganglia':
-    ensure  => present,
-    require => Package['ganglia_webserver'],
-    content => template('ganglia/ganglia');
-  }
+#  file {'/etc/apache2/sites-enabled/ganglia':
+#    ensure  => link,
+#    target  => '/etc/apache2/sites-available/ganglia',
+#    require => File['/etc/apache2/sites-available/ganglia'],
+#  }
+#
+#  file {'/etc/apache2/sites-available/ganglia':
+#    ensure  => present,
+#    require => Package['ganglia_webserver'],
+#    content => template('ganglia/ganglia');
+#  }
 }
